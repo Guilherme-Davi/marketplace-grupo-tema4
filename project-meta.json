@@ -1,0 +1,21 @@
+{
+  "curso": "Ciência da Computação",
+  "disciplina": "Projeto de Programação",
+  "tema_escolhido": "4",
+  "linguagem": "Java",
+  "gerenciador_dependencias": "Maven",
+  "integrantes": [
+    {
+      "nome": "Guilherme Davi",
+      "github_username": "Guilherme-Davi"
+    },
+    {
+      "nome": "Artur Mateus",
+      "github_username": "Artur3Mateus"
+    },
+    {
+      "nome": "José Neto",
+      "github_username": "DovShin"
+    }
+  ]
+}
