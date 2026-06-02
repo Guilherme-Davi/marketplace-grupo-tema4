@@ -1,28 +1,29 @@
-# POO PBL - Tema 4: Marketplace de Economia Circular
+# Marketplace de Economia Circular - Tema 4
 
 ## Descrição
 
-Este projeto implementa o núcleo de domínio de um marketplace de economia circular, no qual usuários cadastram itens que não usam mais e podem propor trocas baseadas em match de interesses e sistema de créditos.
+Este projeto representa o núcleo de domínio de um marketplace de economia circular. A proposta é permitir que usuários cadastrem itens que não utilizam mais, como livros e eletrônicos, e realizem trocas com outros usuários por meio de propostas de negociação.
 
-O projeto foi desenvolvido para a atividade **Projeto Prático Integrador: Engenharia de Software e Orientação a Objetos**, utilizando Orientação a Objetos, DDD, testes automatizados com JUnit e CI/CD com GitHub Actions.
+O foco principal do sistema está na implementação das regras de negócio utilizando Programação Orientada a Objetos, Domain-Driven Design (DDD), testes automatizados com JUnit e integração contínua com GitHub Actions.
 
-## Tema escolhido
+## Tema Escolhido
 
-**Tema 4 - Marketplace de Economia Circular (Troca de Objetos e Livros)**
+**Tema 4 – Marketplace de Economia Circular (Troca de Objetos e Livros)**
 
-## Tecnologias
+## Tecnologias Utilizadas
 
-- Java 17
-- Maven
-- JUnit 5
-- GitHub Actions
+* Java 17
+* Maven
+* JUnit 5
+* GitHub Actions
 
-## Estrutura do projeto
+## Estrutura do Projeto
 
 ```txt
 .github/
 └── workflows/
     └── ci.yml
+
 src/
 ├── domain/
 │   ├── entities/
@@ -32,88 +33,82 @@ src/
 ├── application/
 ├── infrastructure/
 └── presentation/
+
 tests/
 ├── application/
 └── domain/
 ```
 
-## Conceitos de DDD aplicados
+## Modelagem do Domínio
 
 ### Entidades
 
-- `Usuario`
-- `Item`
-- `Livro`
-- `Eletronico`
-- `PropostaTroca`
+* Usuario
+* Item
+* Livro
+* Eletronico
+* PropostaTroca
 
 ### Value Object
 
-- `Credito`
+* Credito
 
-A classe `Credito` é imutável e não possui identidade própria. Ela representa apenas um valor dentro do domínio.
+A classe `Credito` representa o saldo de créditos do usuário. Por ser imutável, qualquer alteração de valor gera uma nova instância do objeto.
 
 ### Aggregate Root
 
-- `Usuario`
+* Usuario
 
-O usuário é tratado como raiz de agregado porque controla seus próprios itens cadastrados e sua carteira de créditos.
+O usuário foi definido como raiz do agregado por ser responsável pelo gerenciamento dos itens cadastrados e dos créditos associados à sua conta.
 
 ### Serviço de Domínio
 
-- `ServicoDeMatch`
+* ServicoDeMatch
 
-Responsável por validar se dois itens podem gerar uma proposta de troca.
+Responsável por verificar se dois itens podem participar de uma proposta de troca.
 
-### Camada de Aplicação
+### Caso de Uso
 
-- `CriarPropostaTrocaUseCase`
+* CriarPropostaTrocaUseCase
 
-Representa o caso de uso para criar uma proposta de troca respeitando as regras de domínio.
+Responsável pela criação de propostas de troca após a validação das regras de negócio.
 
-## Regras de negócio implementadas
+## Regras de Negócio Implementadas
 
-- Usuário não pode ser criado sem nome.
-- Item não pode ser criado sem título, estado ou proprietário.
-- Livro não pode ser criado sem autor.
-- Eletrônico não pode ter garantia negativa.
-- Crédito não pode ser negativo.
-- Não é permitido remover créditos acima do saldo disponível.
-- Usuário só pode cadastrar item que pertence a ele.
-- Usuário não pode propor troca com o próprio item.
-- Proposta de troca começa com status `PENDENTE`.
-- Proposta aceita muda para `ACEITA`.
-- Proposta recusada muda para `RECUSADA`.
-- Proposta finalizada não pode ser alterada.
-- Ao aceitar uma proposta, os dois itens ficam indisponíveis.
+* Usuário não pode ser criado sem nome.
+* Item não pode ser criado sem título, estado ou proprietário.
+* Livro deve possuir autor informado.
+* Eletrônico não pode possuir garantia negativa.
+* Crédito não pode possuir valor negativo.
+* Não é permitido remover créditos acima do saldo disponível.
+* Usuário só pode cadastrar itens de sua propriedade.
+* Usuário não pode criar proposta utilizando item próprio.
+* Toda proposta inicia com status PENDENTE.
+* Uma proposta pode ser ACEITA ou RECUSADA.
+* Propostas finalizadas não podem ser alteradas.
+* Ao aceitar uma proposta, os itens envolvidos tornam-se indisponíveis.
 
-## Como executar os testes
+## Como Executar os Testes
 
 ```bash
 mvn clean test
 ```
 
-## Como executar a demonstração
+## Como Executar o Projeto
 
 ```bash
 mvn clean compile
 java -cp target/classes presentation.Main
 ```
 
-Ou execute a classe `presentation.Main` pela IDE.
+Também é possível executar a classe `presentation.Main` diretamente pela IDE.
 
-## Fluxo de trabalho sugerido
+## Organização do Desenvolvimento
 
-```bash
-feature/itens
-feature/usuario-creditos
-feature/propostas
-```
+O desenvolvimento foi dividido em branches para facilitar a colaboração entre os membros do grupo:
 
-Cada integrante deve fazer commits separados, preferencialmente seguindo:
+* feature/usuario-creditos
+* feature/itens
+* feature/propostas
 
-```txt
-test: cria teste da regra
-feat: implementa regra
-refactor: melhora código
-```
+Cada branch ficou responsável por uma parte específica do domínio, com commits separados para testes, implementação e ajustes de código.
