@@ -1,4 +1,3 @@
-// Especialização para livros
 package domain.entities;
 
 import domain.enums.EstadoItem;

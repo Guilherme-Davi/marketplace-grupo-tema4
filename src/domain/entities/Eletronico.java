@@ -1,4 +1,3 @@
-// Especialização para eletrônicos
 package domain.entities;
 
 import domain.enums.EstadoItem;

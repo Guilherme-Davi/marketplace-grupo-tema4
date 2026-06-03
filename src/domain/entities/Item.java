@@ -1,4 +1,3 @@
-// Classe base para os itens negociados
 package domain.entities;
 
 import domain.enums.EstadoItem;
